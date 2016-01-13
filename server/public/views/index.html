@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="builtInApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Transcendence through Twitter</title>
+
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/assets/scripts/client.min.js"></script>
+
+</head>
+<body ng-controller="MainController">
+
+    <h2>You need a new twitter handle.</h2>
+    <h4>(It wasn't a question)</h4>
+
+    <button ng-click="getWords()">Generate</button>
+    <ul>
+        <li ng-repeat="word in words"><a ng-href="http://www.twitter.com/{{twitterPost}}">{{twitterPost}}</a>
+        </li>
+    </ul>
+</body>
+</html>
