@@ -14,13 +14,10 @@
     <h4>(It wasn't a question)</h4>
 
     <button ng-click="getWords()">Generate</button>
-    <p> nouns: {{nouns}}</p>
-    <p> adjectives: {{adjectives}}</p>
-    <p>twitterPost: {{twitterPost}}</p>
-    <!--<ul>-->
-        <!--<li ng-repeat="user in getWords track by $index">-->
-            <!--<a ng-href="http://www.twitter.com/{{user.twitterPost}}">{{user.twitterPost}}</a>-->
-        <!--</li>-->
-    <!--</ul>-->
+    <ul>
+        <li ng-repeat="user in twitterPost track by $index">
+            <a ng-href="http://www.twitter.com/{{user}}">{{user}}</a>
+        </li>
+    </ul>
 </body>
 </html>

@@ -11,30 +11,29 @@ app.controller('MainController',['$scope','$http', function($scope, $http){
 
     $scope.getWords = function() {
 
-        $http.get('/getNouns').then(function (response) {
-            for (i = 0; i < response.data.nouns.length; i++) {
-                nounArray.push(response.data.nouns[randomNumber(0, response.data.nouns.length - 1)].Noun);
-            }
-        });
+        fetchWords();
 
-        $scope.nouns = nounArray;
+        function fetchWords() {
+            $http.get('/getNouns').then(function (response) {
+                for (i = 0; i < response.data.nouns.length; i++) {
+                    nounArray.push(response.data.nouns[randomNumber(0, response.data.nouns.length - 1)].Noun);
+                }
+            });
 
-        $http.get('/getAdj').then(function (response) {
-            for (i = 0; i < response.data.adjectives.length; i++) {
-                adjArray.push(response.data.adjectives[randomNumber(0, response.data.adjectives.length - 1)].Adjective);
-            }
-        });
-
-        $scope.adjectives = adjArray;
-
-        createUser();
-    };
-
-    var createUser = function() {
-        for (i = 0; i < nounArray.length; i++) {
-            var newUser = nounArray[i] + adjArray[i];
-            userArray.push(newUser);
+            $http.get('/getAdj').then(function (response) {
+                for (i = 0; i < response.data.adjectives.length; i++) {
+                    adjArray.push(response.data.adjectives[randomNumber(0, response.data.adjectives.length - 1)].Adjective);
+                }
+            });
+            makeUser();
         }
+
+        function makeUser() {
+            for (i = 0; i < nounArray.length; i++) {
+                userArray.push(adjArray[i] + nounArray[i])
+            }
+        }
+
         $scope.twitterPost = userArray;
     };
 
