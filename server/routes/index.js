@@ -10,11 +10,11 @@ router.get('/', function(request, response){
 });
 
 router.get('/getNouns', function(request, response){
-    response.sendFile(path.join(__dirname, 'data/nouns.json'))
+    response.sendFile(path.join(__dirname, '../../data/nouns.json'))
 });
 
 router.get('/getAdj', function(request, response){
-    response.sendFile(path.join(__dirname, 'data/adjectives.json'))
+    response.sendFile(path.join(__dirname, '../../data/adjectives.json'))
 });
 
 module.exports = router;

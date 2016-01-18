@@ -7,12 +7,18 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
             build: {
                 src: 'client/client.js',
                 dest: 'server/public/assets/scripts/client.min.js'
+            }
+        },
+        watch: {
+            scripts: {
+                files: ['client/client.js'],
+                tasks: ['uglify'],
+                options: {
+                    spawn: false
+                }
             }
         },
         copy: {
@@ -21,16 +27,17 @@ module.exports = function(grunt) {
                 cwd: "node_modules/",
                 src: [
                     "angular/angular.min.js",
-                    "angular/angular.min.js.map",
-                    "angular/angular-csp.css"
+                    "angular/angular.min.js.map"
                 ],
-                "dest": "server/public/vendor/"
+                "dest": "server/public/vendors" +
+                "/"
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
     grunt.registerTask('default', ['copy', 'uglify']);

@@ -15,7 +15,7 @@
 
     <button ng-click="getWords()">Generate</button>
     <ul>
-        <li ng-repeat="word in words"><a ng-href="http://www.twitter.com/{{twitterPost}}">{{twitterPost}}</a>
+        <li ng-repeat="user in getWords track by $index"><a ng-href="http://www.twitter.com/{{user.twitterPost}}">{{user.twitterPost}}</a>
         </li>
     </ul>
 </body>
