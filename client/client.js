@@ -5,7 +5,7 @@
 var app = angular.module('builtInApp', []);
 var adjArray = [];
 var nounArray = [];
-
+var userArray = [];
 
 app.controller('MainController',['$scope','$http', function($scope, $http){
 
@@ -13,7 +13,7 @@ app.controller('MainController',['$scope','$http', function($scope, $http){
 
         $http.get('/getNouns').then(function (response) {
             for (i = 0; i < response.data.nouns.length; i++) {
-                nounArray.push(response.data.nouns[randomNumber(0, response.data.nouns.length - 1)]);
+                nounArray.push(response.data.nouns[randomNumber(0, response.data.nouns.length - 1)].Noun);
             }
         });
 
@@ -21,14 +21,21 @@ app.controller('MainController',['$scope','$http', function($scope, $http){
 
         $http.get('/getAdj').then(function (response) {
             for (i = 0; i < response.data.adjectives.length; i++) {
-                adjArray.push(response.data.adjectives[randomNumber(0, response.data.adjectives.length - 1)]);
+                adjArray.push(response.data.adjectives[randomNumber(0, response.data.adjectives.length - 1)].Adjective);
             }
         });
 
         $scope.adjectives = adjArray;
 
-        //recombine here... for twitterPost
+        createUser();
+    };
 
+    var createUser = function() {
+        for (i = 0; i < nounArray.length; i++) {
+            var newUser = nounArray[i] + adjArray[i];
+            userArray.push(newUser);
+        }
+        $scope.twitterPost = userArray;
     };
 
     function randomNumber(min, max) {
